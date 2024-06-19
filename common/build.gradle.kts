@@ -4,6 +4,7 @@ plugins {
     id("com.android.library")
     kotlin("native.cocoapods")
     kotlin("plugin.serialization")
+    alias(libs.plugins.compose.compiler)
 }
 
 //TODO: change your group
