@@ -1,15 +1,10 @@
 plugins {
-    id("org.jetbrains.compose")
-    id("com.android.application")
-    kotlin("android")
+    alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.android.application)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.jetbrains.kotlin.android)
 }
 
-dependencies {
-    implementation(project(":common"))
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.koin.compose)
-}
 
 android {
     compileSdk = libs.versions.compileSdk.get().toInt()
@@ -22,8 +17,20 @@ android {
         versionName = "1.0-SNAPSHOT"
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildTypes { getByName("release") { isMinifyEnabled = false } }
+    namespace = "com.kashif.android"
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+    dependencies {
+        implementation(projects.common)
+        implementation(libs.androidx.activity.compose)
+        implementation(libs.koin.compose)
+    }
+}
+dependencies {
+    implementation(libs.androidx.coreKtx)
 }

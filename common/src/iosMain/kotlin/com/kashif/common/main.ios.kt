@@ -1,9 +1,9 @@
 package com.kashif.common
 
-import androidx.compose.ui.window.Application
+import androidx.compose.ui.window.ComposeUIViewController
 import platform.UIKit.UIViewController
 
-fun MainViewController(): UIViewController =
-    Application("Example Application") {
-        App("Ios")
-    }
+@Suppress("unused","FunctionName")
+fun MainViewController(): UIViewController = ComposeUIViewController{
+    App("Ios")
+}

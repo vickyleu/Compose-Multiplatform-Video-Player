@@ -1,37 +1,37 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    kotlin("multiplatform")
-    id("org.jetbrains.compose")
+    alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.compiler)
 }
-
-//TODO: Change group
 
 group = "com.kashif"
 version = "1.0-SNAPSHOT"
 
 
 kotlin {
+    applyDefaultHierarchyTemplate()
     jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "11"
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        compilerOptions {
+            jvmTarget.set(JvmTarget.fromTarget("17"))
         }
         withJava()
     }
     sourceSets {
-        val jvmMain by getting {
+        jvmMain.get().apply {
             dependencies {
-                implementation(project(":common"))
+                implementation(projects.common)
                 implementation(compose.desktop.currentOs)
-
             }
             configurations.all {
                 // some dependencies contains it, this causes an exception to initialize the Main dispatcher in desktop for image loader
                 exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-android")
             }
         }
-        val jvmTest by getting
     }
 }
 
