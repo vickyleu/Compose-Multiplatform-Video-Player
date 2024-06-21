@@ -16,21 +16,46 @@ plugins {
 group = "com.kashif"
 version = "1.0-SNAPSHOT"
 
-fun composeDependency(groupWithArtifact: String) = "$groupWithArtifact:${libs.versions.compose.plugin}"
+fun composeDependency(groupWithArtifact: String) =
+    "$groupWithArtifact:${libs.versions.compose.plugin}"
 
 kotlin {
+
+    this.metadata {
+        this.compilations.all {
+            this.output.apply {
+                println("metadata::${this.allOutputs.map { it.absolutePath }.joinToString()}")
+            }
+        }
+    }
+    tasks.withType<CInteropMetadataDependencyTransformationTask>(){
+
+    }
+//    // 设置Commonizer的输出目录
+//    tasks.withType<KotlinCommonizerTask> (){
+////        commonizerOutputDirectory.set(file("/path/to/custom/directory"))
+//    }
+
+
     applyDefaultHierarchyTemplate()
     androidTarget()
     jvm("desktop") {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions{
+        compilerOptions {
             jvmTarget.set(JvmTarget.fromTarget("17"))
         }
     }
 
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+//      it.binaries.all {
+//          this.outputDirectory = file(".bbbbuild")
+//      }
+    }
+
 
     cocoapods {
         summary = "Some description for the Shared Module"
@@ -112,7 +137,7 @@ android {
         targetSdk = libs.versions.targetSdk.get().toInt()
     }
     namespace = "com.kashif.common"
-    dependencies{
+    dependencies {
         testImplementation(libs.junit)
     }
 }

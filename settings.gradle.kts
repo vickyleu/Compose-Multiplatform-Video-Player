@@ -1,5 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
+import org.gradle.internal.extensibility.DefaultExtraPropertiesExtension
+
+
 rootProject.name = "ComposeVideoPlayer"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 pluginManagement {
@@ -63,6 +66,25 @@ pluginManagement {
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.7.0"
 }
+
+gradle.settingsEvaluated {
+    this.extensions.apply {
+        println("${this.extensionsSchema.map { it.name }.joinToString()}")
+        println("${this["ext"].apply { 
+            (this as DefaultExtraPropertiesExtension).apply { 
+                println("${this.properties.map { it.key }}")
+            }
+        }}")
+    }
+    rootProject.buildFile.apply {
+        println("this::${this.absolutePath}")
+    }
+    gradle.gradleHomeDir.apply {
+        println("this::${this?.absolutePath}")
+    }
+}
+
+
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
