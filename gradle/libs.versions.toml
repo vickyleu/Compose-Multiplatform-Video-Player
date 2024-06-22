@@ -5,6 +5,7 @@ compose-plugin = "1.6.11"
 
 jetpack-compose-bom = "2024.06.00"
 coroutines-bom = "1.8.1"
+dokka = "1.9.20"
 
 coreKtx = "1.13.1"
 appcompat = "1.7.0"
@@ -89,3 +90,4 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVersion" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
