@@ -24,7 +24,7 @@ plugins {
 
 
 tasks.register("deletePackages") {
-    val rootProjectName = "compose-videoplayer"//rootDir.name.lowercase(Locale.getDefault())
+    val rootProjectName = "videoplayer"//rootDir.name.lowercase(Locale.getDefault())
 
     val mavenAuthor = "vickyleu"
     val mavenGroup = "com.$mavenAuthor.$rootProjectName"

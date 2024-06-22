@@ -58,7 +58,7 @@ fun createHttpClient(httpClientEngine: HttpClientEngine, json: Json, enableNetwo
         }
 
         install(HttpCallValidator) {
-            handleResponseException { cause -> println("exception $cause") }
+            handleResponseExceptionWithRequest { cause,request -> println("exception $cause request:${request.url}") }
         }
 
         install(ContentNegotiation) { json(json) }

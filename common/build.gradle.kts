@@ -18,6 +18,9 @@ plugins {
 }
 
 kotlin {
+    jvmToolchain {
+        this.languageVersion.set(JavaLanguageVersion.of(17))
+    }
     targets.withType<KotlinNativeTarget> {
         val path = projectDir.resolve("src/nativeInterop/cinterop/CVPObserver")
         binaries.all {
@@ -123,8 +126,8 @@ android {
         minSdk = libs.versions.minSdk.get().toInt()
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     lint {
         targetSdk = libs.versions.targetSdk.get().toInt()
@@ -149,7 +152,7 @@ buildscript {
 ////mavenCentral后台: https://s01.oss.sonatype.org/#stagingRepositories
 //version = "${libs.versions.compose.plugin.get()}.beta1"
 
-group = "com.vickyleu.compose-videoplayer"
+group = "com.vickyleu.videoplayer"
 version = "1.0.2"
 
 
@@ -177,7 +180,7 @@ val javadocJar by tasks.registering(Jar::class) {
 tasks.dokkaHtml {
     // outputDirectory = layout.buildDirectory.get().resolve("dokka")
     offlineMode = false
-    moduleName = "compose-videoplayer"
+    moduleName = "compose"
 
     // See the buildscript block above and also
     // https://github.com/Kotlin/dokka/issues/2406
@@ -221,7 +224,7 @@ extra["githubToken"] = properties["github.token"] as? String
 
 publishing {
     val gitRepoName = "Compose-Multiplatform-Video-Player"
-    val projectName = "compose-videoplayer"//rootProject.name
+    val projectName = "compose"//rootProject.name
     repositories {
         /*maven {
             name = "CustomLocal"

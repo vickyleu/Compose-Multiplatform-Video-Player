@@ -4,6 +4,10 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+.idea/
+.kotlin/
+ios/Pods
+ios/Podfile.lock
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml
